@@ -6,47 +6,36 @@ document.addEventListener('DOMContentLoaded', function() {
     const taskList = document.getElementById('task-list');
 
     // دالة لإضافة مهمة جديدة
-    function addTask() {
-        // الحصول على نص المهمة من input وإزالة المسافات الزائدة
-        const taskText = taskInput.value.trim();
+  function addTask() {
+    // 1. احصل على النص من حقل الإدخال وأزل المسافات الزائدة
+    const taskText = taskInput.value.trim();
 
-        // التحقق من أن المستخدم أدخل نص فعلاً
-        if (taskText === "") {
-            alert("Please enter a task!");
-            return;
-        }
-
-        // إنشاء عنصر <li> جديد للمهمة
-        const li = document.createElement('li');
-        li.textContent = taskText;
-
-        // إنشاء زر الحذف للمهمة
-        const removeBtn = document.createElement('button');
-        removeBtn.textContent = "Remove";
-        removeBtn.className = "remove-btn";
-
-        // عند الضغط على زر الحذف، يتم إزالة المهمة من القائمة
-        removeBtn.onclick = function() {
-            taskList.removeChild(li);
-        };
-
-        // إضافة زر الحذف داخل <li>
-        li.appendChild(removeBtn);
-
-        // إضافة <li> إلى قائمة المهام
-        taskList.appendChild(li);
-
-        // تفريغ حقل الإدخال بعد إضافة المهمة
-        taskInput.value = "";
+    // 2. إذا لم يكتب المستخدم أي نص، أظهر تنبيه
+    if (taskText === "") {
+        alert("Please enter a task!");
+        return;
     }
 
-    // عند الضغط على زر "Add Task" يتم استدعاء addTask
-    addButton.addEventListener('click', addTask);
+    // 3. أنشئ عنصر <li> جديد ليعرض المهمة
+    const li = document.createElement('li');
+    li.textContent = taskText; // عرض نص المهمة داخل العنصر
 
-    // إضافة المهمة عند الضغط على مفتاح Enter داخل input
-    taskInput.addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            addTask();
-        }
-    });
-});
+    // 4. أنشئ زر لإزالة المهمة
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = "Remove"; // نص الزر
+    removeBtn.className = "remove-btn"; // تعيين فئة CSS
+
+    // 5. عند الضغط على الزر، احذف العنصر <li> من القائمة
+    removeBtn.onclick = function() {
+        taskList.removeChild(li);
+    };
+
+    // 6. أضف الزر داخل عنصر <li>
+    li.appendChild(removeBtn);
+
+    // 7. أضف عنصر <li> إلى قائمة المهام
+    taskList.appendChild(li);
+
+    // 8. أفرغ حقل الإدخال لتكون جاهزًا لإضافة مهمة جديدة
+    taskInput.value = "";
+}
